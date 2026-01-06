@@ -3,14 +3,14 @@ from typing import Iterable
 from fileStreams import getFileJsonStream
 from utils import FileProgressLog
 
-# ---------------- CONFIG ----------------
+
 fileOrFolderPath = r"../../testdata"
 recursive = True
-target_subreddits = {"selfhosting", "selfhosted", "homelab", "homeserver", "homenetworking"}
+target_subreddits = {"selfhosting", "selfhosted", "homelab", "homeserver", "homenetworking", "minilab", "homeautomation"}
 
 output_dir = "../../filtered_output"
 os.makedirs(output_dir, exist_ok=True)
-submissions_prefix, comments_prefix = "filtered_submissions", "filtered_comments"
+submissions_prefix, comments_prefix = "fsubmissions", "fcomments"
 rows_per_file = 100_000
 batch_size = 100
 error_log_file = os.path.join(output_dir, "errors.log")
@@ -19,7 +19,6 @@ progress_file = os.path.join(output_dir, "progress.log")
 
 
 class SplitWriter:
-    """Writes JSONL to split files immediately without keeping a batch in memory."""
     def __init__(self, prefix: str):
         self.prefix = prefix
         self.file_index = 0
